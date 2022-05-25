@@ -38,7 +38,7 @@ def construct_lin_reg(X_train, target_train, X_val, target_val, reg, normalize =
 
 def main():
     X_basic, X_technical, target_bin, target_cont, train_indices, val_indices = load_data("cleveland")
-    construct_lin_reg(X_basic[train_indices, :], target_cont[train_indices],X_basic[val_indices], target_cont[val_indices], verbose = True)
+    construct_lin_reg(X_basic[train_indices, :], target_cont[train_indices],X_basic[val_indices], target_cont[val_indices], reg = 0, verbose = True)
     # *** END CODE HERE ***
 
 if __name__ == '__main__':

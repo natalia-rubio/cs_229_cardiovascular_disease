@@ -25,7 +25,7 @@ def run_log_lin_comp(normalize, filename):
 
                 print(f"Fitting logistic regression model on {inst_name} {feature_type} data with {reg} regularization.")
                 log_reg, pred_train, train_accuracy, pred_val, val_accuracy = \
-                construct_log_reg(X_basic[train_indices, :], target_bin[train_indices],X_basic[val_indices], target_bin[val_indices], normalize, reg)
+                construct_log_reg(X[train_indices, :], target_bin[train_indices],X[val_indices], target_bin[val_indices], normalize, reg)
                 results_arr[i, 7+3*feat_ind+reg] = str(val_accuracy)[0:4]
 
     np.savetxt(filename, results_arr, delimiter=' & ', fmt = '%s', newline=' \\\\\n')
