@@ -108,14 +108,17 @@ def get_inst_data(inst_name):
         raw_data = open('data/'+inst_name+'.data', "r").read().split('name')
 
     num_samples = len(raw_data); num_attributes = len(attribute_list)
-    print(inst_name + f" {num_samples} samples.")
+
     sample_arr = np.zeros((1,num_attributes))
     for sample in raw_data:
         sample.replace("\n", " ")
         attributes = np.float_(sample.split())
         if attributes.size != 75:
-            print("missing data"); continue
+            print("missing data")
+            num_samples = num_samples - 1
+            continue
         sample_arr = np.vstack((sample_arr, attributes.reshape(1, num_attributes)))
+    print(inst_name + f" {num_samples} samples.")
     sample_arr = sample_arr[1:,:]
     all_data = pd.DataFrame(sample_arr, columns = attribute_list)
 
