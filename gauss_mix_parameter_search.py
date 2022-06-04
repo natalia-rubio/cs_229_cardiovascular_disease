@@ -4,9 +4,9 @@ from gauss_mix import *
 def run_gauss_mix_parameter_search(normalize, feature_type, filename):
     feature_list = ["basic", "technical"]
     dataset_list = ["cleveland", "hungarian", "long_beach", "switzerland", "all"]
-    n_components_opt = [1,2,3,4,5,6]
+    n_components_opt = [1,3,6, 9, 12, 15]
     reg_results = {}
-    results_arr = np.empty((5,13), dtype = object)
+    results_arr = np.empty((5,7), dtype = object)
     for inst_ind in range(len(dataset_list)):
         inst_name = dataset_list[inst_ind]
         X_basic, X_technical, target_bin, target_cont, train_indices, val_indices = load_data(inst_name)
@@ -28,7 +28,9 @@ def run_gauss_mix_parameter_search(normalize, feature_type, filename):
 # run_gauss_mix_parameter_search(False, feature_type = "basic", filename = "log_lin_val_table_basic.csv")
 print("Normalized, Basic Features")
 run_gauss_mix_parameter_search(True, feature_type = "basic", filename = "gauss_mix_val_table_norm_basic.csv")
+run_gauss_mix_parameter_search(False, feature_type = "basic", filename = "gauss_mix_val_table_basic.csv")
 # print("Ugauss_mixormalized, Technical Features")
 # run_gauss_mix_parameter_search(False, feature_type = "technical", filename = "log_lin_val_table_technical.csv")
 print("Normalized, Technical Features")
 run_gauss_mix_parameter_search(True, feature_type = "technical", filename = "gauss_mix_val_table_norm_technical.csv")
+run_gauss_mix_parameter_search(False, feature_type = "technical", filename = "gauss_mix_val_table_technical.csv")

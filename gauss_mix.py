@@ -8,9 +8,10 @@ def get_mse(x,y):
 
 def make_cluster_dict(X_train, target_train, pred_train, num_clusters):
     cluster_dict = {}
+    cluster_sol = {}
     for i in range(num_clusters):
         cluster_dict.update({i:[0,0]})
-        cluster_dict.update({i:0})
+        cluster_sol.update({i:0})
 
     for i in range(len(pred_train)):
         if target_train[i] == 0:
@@ -23,7 +24,7 @@ def make_cluster_dict(X_train, target_train, pred_train, num_clusters):
     return cluster_sol
 
 def get_bin_vals(cluster_sol, pred):
-    bin_pred = 0*preds
+    bin_pred = 0*pred
     for i in range(len(pred)):
         bin_pred[i] = cluster_sol[pred[i]]
     return bin_pred
@@ -51,6 +52,10 @@ def construct_gauss_mix_class(X_train, target_train, X_val, target_val, n_compon
     # if val_accuracy < 0.5:
     #     val_accuracy = 1-val_accuracy
     if verbose == True: print(f"Validation accuracy: {val_accuracy}")
+    print(f"TP: {sum((bin_pred_val==target_val)*(target_val==1))}")
+    print(f"FP: {sum((bin_pred_val!=target_val)*(target_val==0))}")
+    print(f"FN: {sum((bin_pred_val!=target_val)*(target_val==1))}")
+    print(f"TN: {sum((bin_pred_val==target_val)*(target_val==0))}")
 
     return gauss_mix_class, pred_train, train_accuracy, pred_val, val_accuracy
 
