@@ -1,5 +1,6 @@
 from data_extraction import *
 from nn import *
+#import matplotlib
 import matplotlib.pyplot as plt
 def run_nn_parameter_search(normalize, feature_type, type, filename):
     feature_list = ["basic", "technical"]
@@ -40,10 +41,13 @@ def run_nn_parameter_search(normalize, feature_type, type, filename):
                             train_accuracy_list.append(train_accuracy); val_accuracy_list.append(val_accuracy)
     np.savetxt(filename, results_arr, delimiter=' & ', fmt = '%s', newline=' \\\\\n')
     num_models = len(train_accuracy_list)
+    font = {'family' : 'serif', 'size'   : 16}
+
     plt.clf()
-    plt.scatter(np.linspace(1,num_models, num_models, endpoint=True), np.array(train_accuracy_list), s = 40, alpha = 0.6, marker = "o", label = "train")
-    plt.scatter(np.linspace(1,num_models, num_models, endpoint=True), np.array(val_accuracy_list), s = 40, alpha = 0.6, marker = "d", label = "validation")
-    plt.xlabel("model trials"); plt.ylabel("accuray"); plt.legend(); plt.ylim([0.65, 1]); plt.savefig("train_val_plot", bbox_inches = "tight")
+    plt.scatter(np.linspace(1,num_models, num_models, endpoint=True), np.array(train_accuracy_list), s = 60, alpha = 0.6, marker = "o", label = "train")
+    plt.scatter(np.linspace(1,num_models, num_models, endpoint=True), np.array(val_accuracy_list), s = 60, alpha = 0.6, marker = "d", label = "validation")
+    plt.xlabel("model trials",font); plt.ylabel("accuracy",font); plt.legend(prop={'size': 16, 'family' : 'serif'});
+    plt.xticks(fontsize=14); plt.yticks(fontsize=16); plt.ylim([0.65, 1]); plt.savefig("train_val_plot", bbox_inches = "tight")
 # print("Unnormalized, Basic Features")
 # run_nn_parameter_search(False, feature_type = "basic", filename = "log_lin_val_table_basic.csv")
 print("Normalized, Basic Features")
